@@ -159,8 +159,7 @@
 	<div class="message-container">
 
 		<div id="message-input" class="message-input" contenteditable="true"
-			data-placeholder="Type your message here..." spellcheck="true" onfocus="hidePlaceholder()"
-			onblur="showPlaceholder()" oninput="updateOutputCode()"></div>
+			data-placeholder="Type your message here..." spellcheck="true" oninput="updateOutputCode()"></div>
 	</div>
 
 	<div class="color-picker-container">
@@ -190,18 +189,6 @@
 		colorPicker.addEventListener('input', () => {
 			selectedColor = colorPicker.value;
 		});
-
-		function hidePlaceholder() {
-			if (messageInput.innerHTML === "") {
-				messageInput.innerHTML = "";
-			}
-		}
-
-		function showPlaceholder() {
-			if (messageInput.innerHTML === "") {
-				messageInput.innerHTML = "";
-			}
-		}
 
 		function applyColor() {
 			const selection = window.getSelection();
