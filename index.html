@@ -239,8 +239,7 @@
 	<div class="color-picker-container">
 		<label for="color-picker">Color:</label>
 		<input type="color" id="color-picker" value="#ffffff">
-		<button onclick="applyColor()" id="apply-button" popovertarget="message-warning"
-			popovertargetaction="show">Apply</button>
+		<button onclick="applyColor()" id="apply-button">Apply</button>
 
 	</div>
 
@@ -268,27 +267,38 @@
 
 		function applyColor() {
 			const selection = window.getSelection();
+
 			if (selection.rangeCount === 0) {
-				// alert('Please select text to apply color.');
-				console.log('selection.rangeCount === 0');
+				const popup = document.getElementById('message-warning');
+				try {
+					popup.togglePopover();
+				} catch (err) {
+					console.log(err);
+				}
 				return;
 			}
-
 			const range = selection.getRangeAt(0);
 			if (range.collapsed) {
-				console.log('selection.getRangeAt(0) === true');
-				// alert('Please select text to apply color.');
+				const popup = document.getElementById('message-warning');
+				try {
+					popup.togglePopover();
+				} catch (err) {
+					console.log(err);
+				}
 				return;
 			}
 
+			try {
+				const popup = document.getElementById('message-warning');
+				popup.hidePopover();
+			} catch (err) {
+				console.log(err);
+			}
 			const span = document.createElement('span');
 			span.style.color = selectedColor;
 			range.surroundContents(span);
 
 			updateOutputCode();
-
-			const message = document.getElementById('message-input');
-			message.blur();
 		}
 
 		function updateOutputCode() {
