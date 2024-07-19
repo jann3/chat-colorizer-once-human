@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/chat-color/*"
+  to = "https://chat-colorizer-once-human.netlify.app/:splat"
+  status = 200
+  force = false
