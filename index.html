@@ -54,19 +54,29 @@
 			overflow-wrap: break-word;
 			text-shadow: 0 0 1px #000, 0 0 3px #000;
 			border-radius: 0.5rem;
-			anchor-name: --message-el;
 		}
 
 		#message-warning {
 			isolation: isolate;
 			position: absolute;
 			inset: auto;
-			position-anchor: --message-el;
-			top: calc(anchor(--message-el bottom) - 1rem);
-			left: anchor(--message-el center);
-			translate: -50%;
 			padding: 10px;
 			z-index: 9990;
+		}
+
+		@supports(position-anchor: --anchorName) {
+
+			/* target Browsers which support CSS anchor */
+			.message-input {
+				anchor-name: --message-el;
+			}
+
+			#message-warning {
+				position-anchor: --message-el;
+				top: calc(anchor(--message-el bottom) - 1rem);
+				left: anchor(--message-el center);
+				translate: -50%;
+			}
 		}
 
 		#message-warning>div {
