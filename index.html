@@ -211,16 +211,22 @@
 			background-color: transparent;
 			border-color: transparent;
 		}
+
+		@media (max-width: 380px) {
+			.collapse {
+				display: none;
+			}
+		}
 	</style>
 </head>
 
 <body>
-	<h1>Chat Colorizer for Once Human</h1>
+	<h1>Chat Color<span class="collapse">izer</span> for Once Human</h1>
 	<ol>
 		<li>Enter a message</li>
 		<li>Choose a color</li>
-		<li>Highlight your message and click Apply</li>
-		<li>Copy &amp; paste the output code into chat</li>
+		<li>Highlight <span class="collapse">your </span>message and <span class="collapse">click </span>Apply</li>
+		<li>Copy <span class="collapse">&amp; paste </span>the output <span class="collapse">code </span>into chat</li>
 	</ol>
 	<div class="message-container">
 		<div id="message-input" class="message-input" contenteditable="true"
@@ -244,7 +250,7 @@
 		<textarea id="output-code" class="output-code" readonly maxlength="130"></textarea>
 		<div class="output-footer">
 			<button onclick="copyCode()" id="copy-code"><img src="icons/copy-regular.svg" alt="Copy">Copy</button>
-			<div class="char-counter" id="char-counter">0/130 characters</div>
+			<div class="char-counter" id="char-counter">0/130<span class="collapse"> characters</span></div>
 		</div>
 	</div>
 	<footer>Please use considerately <span>&lt;3</span></footer>
@@ -330,7 +336,7 @@
 		function updateCharCounter(length) {
 			const style = getComputedStyle(document.body);
 
-			charCounter.textContent = `${length}/${charLimit} characters`;
+			charCounter.textContent = `${length}/${charLimit}<span class="collapse"> characters</span>`;
 			if (length > charLimit) {
 				charCounter.style.color = style.getPropertyValue('--warn-font');
 			} else {
