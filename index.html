@@ -19,9 +19,18 @@
 		}
 
 		body {
-			padding: 0 20px 0 20px;
 			margin: 0;
-			background-color: var(--main-bg);
+			background-image: url('images/once-human-background-low-res.jpg');
+			height: 100%;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			backdrop-filter: blur(10px);
+		}
+
+		.background {
+			padding: 0 20px 0 20px;
+			background-color: rgba(33, 32, 43, 0.6);
 			font-family: 'Noto Sans', sans-serif;
 			color: var(--main-font);
 			min-height: 100vh;
@@ -221,39 +230,47 @@
 </head>
 
 <body>
-	<h1>Chat Color<span class="collapse">izer</span> for Once Human</h1>
-	<ol>
-		<li>Enter a message</li>
-		<li>Choose a color</li>
-		<li>Highlight <span class="collapse">your </span>message and <span class="collapse">click </span>Apply</li>
-		<li>Copy <span class="collapse">&amp; paste </span>the output <span class="collapse">code </span>into chat</li>
-	</ol>
-	<div class="message-container">
-		<div id="message-input" class="message-input" contenteditable="true"
-			data-placeholder="Type your message here..." spellcheck="true" oninput="updateOutputCode()"></div>
-		<div id="message-warning" popover>
-			<div>
-				Please select text then apply</div>
+	<div class="background">
+
+		<h1>Chat Color<span class="collapse">izer</span> for Once Human</h1>
+		<ol>
+			<li>Enter a message</li>
+			<li>Choose a color</li>
+			<li>Highlight <span class="collapse">your </span>message and <span class="collapse">click </span>Apply
+			</li>
+			<li>Copy <span class="collapse">&amp; paste </span>the output <span class="collapse">code </span>into
+				chat
+			</li>
+		</ol>
+		<div class="message-container">
+			<div id="message-input" class="message-input" contenteditable="true"
+				data-placeholder="Type your message here..." spellcheck="true" oninput="updateOutputCode()"></div>
+			<div id="message-warning" popover>
+				<div>
+					Please select text then apply</div>
+			</div>
 		</div>
-	</div>
 
 
-	<div class="color-picker-container">
-		<label for="color-picker">Color:</label>
-		<input type="color" id="color-picker" value="#ffffff">
-		<button onclick="applyColor()" id="apply-button">Apply</button>
+		<div class="color-picker-container">
+			<label for="color-picker">Color:</label>
+			<input type="color" id="color-picker" value="#ffffff">
+			<button onclick="applyColor()" id="apply-button">Apply</button>
 
-	</div>
-
-	<div class="output-container">
-		<h2>Output Code</h2>
-		<textarea id="output-code" class="output-code" readonly maxlength="130"></textarea>
-		<div class="output-footer">
-			<button onclick="copyCode()" id="copy-code"><img src="icons/copy-regular.svg" alt="Copy">Copy</button>
-			<div class="char-counter" id="char-counter">0/130<span class="collapse"> characters</span></div>
 		</div>
+
+		<div class="output-container">
+			<h2>Output Code</h2>
+			<textarea id="output-code" class="output-code" readonly maxlength="130"></textarea>
+			<div class="output-footer">
+				<button onclick="copyCode()" id="copy-code"><img src="icons/copy-regular.svg" alt="Copy">Copy</button>
+				<div class="char-counter" id="char-counter">0/130<span class="collapse"> characters</span></div>
+			</div>
+		</div>
+		<footer>Please use considerately <span>&lt;3</span></footer>
+
 	</div>
-	<footer>Please use considerately <span>&lt;3</span></footer>
+
 	<script>
 
 		const colorPicker = document.getElementById('color-picker');
@@ -336,7 +353,7 @@
 		function updateCharCounter(length) {
 			const style = getComputedStyle(document.body);
 
-			charCounter.textContent = `${length}/${charLimit}<span class="collapse"> characters</span>`;
+			charCounter.innerHTML = `${length}/${charLimit}<span class="collapse"> characters</span>`;
 			if (length > charLimit) {
 				charCounter.style.color = style.getPropertyValue('--warn-font');
 			} else {
