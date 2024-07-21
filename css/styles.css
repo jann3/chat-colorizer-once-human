@@ -6,11 +6,9 @@
     --main-focus: #28a3cf;
 }
 
-html {
-    background-color: var(--main-bg);
-}
 
 body {
+    background-color: var(--main-bg);
     margin: 0;
     height: 100%;
     background-position: center;
