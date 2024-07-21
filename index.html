@@ -69,7 +69,8 @@
 			border-radius: 0.5rem;
 		}
 
-		#message-warning {
+		#message-warning,
+		#confirm-message {
 			isolation: isolate;
 			position: absolute;
 			inset: auto;
@@ -84,17 +85,29 @@
 				anchor-name: --message-el;
 			}
 
+			#copy-code {
+				anchor-name: --copy-btn-el;
+			}
+
 			#message-warning {
 				position-anchor: --message-el;
 				top: calc(anchor(--message-el bottom) - 1rem);
 				left: anchor(--message-el center);
 				translate: -50%;
 			}
+
+			#confirm-message {
+				position-anchor: --copy-btn-el;
+				top: anchor(--copy-btn-el center);
+				left: anchor(--copy-btn-el right);
+				translate: 0 -50%;
+			}
 		}
 
-		#message-warning>div {
+		#message-warning>div,
+		#confirm-message>div {
 			box-shadow: 0 0 5px var(--main-focus);
-			padding: 10px;
+			padding: 6px 10px;
 			border-radius: 0.3rem;
 			font-size: 1rem;
 			background-color: var(--main-btn);
@@ -271,6 +284,9 @@
 				<div class="char-counter" id="char-counter" aria-label="character limit counter" aria-live="polite">
 					0/130<span class="collapse"> characters</span></div>
 			</div>
+			<div id="confirm-message" popover role="alert">
+				<div>Copied to clipboard</div>
+			</div>
 		</div>
 		<footer>Please use considerately <span aria-label="heart">&lt;3</span></footer>
 
@@ -376,6 +392,12 @@
 			code.select();
 			code.setSelectionRange(0, 130);
 			navigator.clipboard.writeText(code.value);
+			const popup = document.getElementById('confirm-message');
+			try {
+				popup.togglePopover();
+			} catch (err) {
+				console.log(err);
+			}
 		}
 
 		messageInput.addEventListener('input', updateOutputCode);
