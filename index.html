@@ -91,9 +91,9 @@
 
 			#message-warning {
 				position-anchor: --message-el;
-				top: calc(anchor(--message-el bottom) - 1rem);
+				top: calc(anchor(--message-el bottom) - 0.7rem);
 				left: anchor(--message-el center);
-				translate: -50%;
+				translate: -70%;
 			}
 
 			#confirm-message {
@@ -101,6 +101,18 @@
 				top: anchor(--copy-btn-el center);
 				left: anchor(--copy-btn-el right);
 				translate: 0 -50%;
+			}
+		}
+
+		@supports not (position-anchor: --anchorName) {
+
+			/* target browsers that dont support anchor */
+			#message-warning {
+				translate: 15rem 2.2rem;
+			}
+
+			#confirm-message {
+				translate: 5rem -2.8rem;
 			}
 		}
 
@@ -113,7 +125,6 @@
 			background-color: var(--main-btn);
 			color: var(--main-font);
 			border: 1px solid var(--main-font);
-			z-index: 9995;
 		}
 
 		#message-warning::before {
