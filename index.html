@@ -245,8 +245,9 @@
 		</ol>
 		<div class="message-container">
 			<div id="message-input" class="message-input" contenteditable="true"
-				data-placeholder="Type your message here..." spellcheck="true" oninput="updateOutputCode()"></div>
-			<div id="message-warning" popover>
+				data-placeholder="Type your message here..." spellcheck="true" onfocus="closePopup()"
+				oninput="updateOutputCode()" aria-label="Message Input" role="textbox"></div>
+			<div id="message-warning" popover role="alert">
 				<div>
 					Please select text then apply</div>
 			</div>
@@ -261,14 +262,17 @@
 		</div>
 
 		<div class="output-container">
-			<h2>Output Code</h2>
-			<textarea id="output-code" class="output-code" readonly maxlength="130"></textarea>
+			<h2 id="output-heading">Output Code</h2>
+			<textarea id="output-code" class="output-code" readonly maxlength="130"
+				aria-labelledby="output-heading"></textarea>
 			<div class="output-footer">
-				<button onclick="copyCode()" id="copy-code"><img src="icons/copy-regular.svg" alt="Copy">Copy</button>
-				<div class="char-counter" id="char-counter">0/130<span class="collapse"> characters</span></div>
+				<button onclick="copyCode()" id="copy-code" aria-label="copy output code"><img
+						src="icons/copy-regular.svg" alt="Copy" role="presentation">Copy</button>
+				<div class="char-counter" id="char-counter" aria-label="character limit counter" aria-live="polite">
+					0/130<span class="collapse"> characters</span></div>
 			</div>
 		</div>
-		<footer>Please use considerately <span>&lt;3</span></footer>
+		<footer>Please use considerately <span aria-label="heart">&lt;3</span></footer>
 
 	</div>
 
@@ -308,17 +312,22 @@
 				return;
 			}
 
+			closePopup();
+
+			const span = document.createElement('span');
+			span.style.color = selectedColor;
+			range.surroundContents(span);
+
+			updateOutputCode();
+		}
+
+		function closePopup() {
 			try {
 				const popup = document.getElementById('message-warning');
 				popup.hidePopover();
 			} catch (err) {
 				console.log(err);
 			}
-			const span = document.createElement('span');
-			span.style.color = selectedColor;
-			range.surroundContents(span);
-
-			updateOutputCode();
 		}
 
 		function updateOutputCode() {
