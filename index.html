@@ -21,7 +21,6 @@
 		body {
 			margin: 0;
 			background-color: var(--main-bg);
-			background-image: url('images/once-human-background-low-res.jpg');
 			height: 100%;
 			background-position: center;
 			background-repeat: no-repeat;
@@ -31,7 +30,7 @@
 
 		.background {
 			padding: 0 20px 0 20px;
-			background-color: rgba(33, 32, 43, 0.6);
+			background-color: rgba(33, 32, 43, 0.69);
 			font-family: 'Noto Sans', sans-serif;
 			color: var(--main-font);
 			min-height: 100vh;
@@ -411,6 +410,19 @@
 			}
 		}
 
+		const backgroundImages = [
+			'images/once-human-background-low-res1.jpg',
+			'images/once-human-background-low-res2.jpg',
+			'images/once-human-background-low-res3.jpg',
+			'images/once-human-background-low-res4.jpg'
+		];
+
+		function setRandomBackgroundImage() {
+			const randomIndex = Math.floor(Math.random() * backgroundImages.length);
+			document.body.style.backgroundImage = `url(${backgroundImages[randomIndex]})`;
+		}
+
+		window.addEventListener('load', setRandomBackgroundImage);
 		messageInput.addEventListener('input', updateOutputCode);
 
 	</script>
