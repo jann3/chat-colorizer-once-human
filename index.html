@@ -6,14 +6,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="google-site-verification" content="s6ufCC7CSQyoGo_5M1eioyyB64Viygwcv5nrCpA8E9o">
 	<title>Chat Colorizer Once Human</title>
-	<link rel="icon" href="favicon.svg" type="image/svg+xml">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
 		rel="stylesheet">
-	<link rel="canonical" href="https://janne.dev/chat-color/">
 	<base href="/chat-color/">
-	<link rel="stylesheet" href="css/styles.css">
+	<link rel="preload" href="scripts/background-image-script.js" as="script">
+	<link rel="stylesheet" href="css/core-styles.css">
+	<link rel="icon" href="favicon.svg" type="image/svg+xml">
+	<script src="scripts/background-image-script.js"></script>
+	<link rel="canonical" href="https://janne.dev/chat-color/">
 	<link rel="prefetch" href="images/once-human-background-low-res1.jpg">
 	<link rel="prefetch" href="images/once-human-background-low-res2.jpg">
 	<link rel="prefetch" href="images/once-human-background-low-res3.jpg">
@@ -69,7 +71,7 @@
 
 	</div>
 
-	<script src="scripts/script.js"></script>
+	<script src="scripts/core-script.js" defer></script>
 </body>
 
 </html>
