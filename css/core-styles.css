@@ -109,7 +109,7 @@ input,
 textarea,
 button {
     border-radius: 0.5rem;
-    border: 1px solid white;
+    border: 1px solid var(--main-font);
 }
 
 button,
@@ -118,10 +118,30 @@ input[type="color"] {
     padding-right: 10px;
     height: 2rem;
     font-size: 1rem;
+    cursor: pointer;
+}
+
+input[type="color"] {
+    padding: 0px;
+    -webkit-appearance: none;
+    border: 1px solid var(--main-font);
+    border-radius: 0.5rem;
+    width: 2rem;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0;
 }
 
 button {
-    cursor: pointer;
     display: inline-flex;
     align-items: center;
 }
