@@ -37,16 +37,27 @@
 
     /* target browsers that dont support anchor */
     #message-warning {
-        translate: 15rem 2.2rem;
+        translate: 12rem 2.2rem;
     }
 
     #confirm-message {
         translate: 5rem -2.8rem;
     }
+
+    @media (max-width: 530px) {
+        #message-warning {
+            translate: -0.45rem 2.2rem;
+        }
+
+        #confirm-message {
+            translate: -0.45rem -5.5rem;
+        }
+    }
 }
 
 #message-warning>div,
 #confirm-message>div {
+    white-space: nowrap;
     box-shadow: 0 0 5px var(--main-focus);
     padding: 6px 10px;
     border-radius: 0.3rem;
@@ -64,7 +75,7 @@
     transform: translateX(-50%);
     border-width: 0 10px 10px 10px;
     border-style: solid;
-    border-color: transparent transparent #fff transparent;
+    border-color: transparent transparent var(--main-font) transparent;
     z-index: 9998;
 }
 
@@ -88,5 +99,10 @@
 @media (max-width: 380px) {
     .collapse {
         display: none;
+    }
+
+    #message-warning>div,
+    #confirm-message>div {
+        white-space: normal;
     }
 }

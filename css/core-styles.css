@@ -21,7 +21,10 @@ body {
     background-color: rgba(33, 32, 43, 0.69);
     font-family: 'Noto Sans', sans-serif;
     color: var(--main-font);
+    /* modern fallback */
     min-height: 100vh;
+    /* modern browsers */
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
 }
@@ -37,12 +40,12 @@ h2 {
 }
 
 h1 {
-    font-size: clamp(1.4rem, -0.2rem + 6.4vw, 2.4rem);
+    font-size: clamp(1.3rem, -0.2rem + 6.4vw, 2.4rem);
     margin: auto 0 0 0;
 }
 
 h2 {
-    font-size: clamp(1.4rem, 0.8rem + 4.8vw, 1.8rem);
+    font-size: clamp(1.3rem, 0.55rem + 4vw, 1.8rem);
     margin: 20px 0 10px 0;
 }
 
@@ -54,7 +57,7 @@ h2 {
 
 .message-input {
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     padding: 10px;
     overflow-wrap: break-word;
     text-shadow: 0 0 1px #000, 0 0 3px #000;
@@ -69,7 +72,7 @@ input[type="text"] {
 
 .message-input[contenteditable]:empty:before {
     content: attr(data-placeholder);
-    color: #ccc;
+    color: #ddd;
 }
 
 .output-code {
@@ -144,7 +147,7 @@ footer {
     justify-content: center;
     font-size: 0.9rem;
     margin-top: auto;
-    padding: 0 0 5px 0;
+    padding: 3px 0 5px 0;
 }
 
 footer span {
