@@ -106,3 +106,8 @@
         white-space: normal;
     }
 }
+
+.blurred {
+    opacity: 0.3;
+    filter: blur(2px);
+}
