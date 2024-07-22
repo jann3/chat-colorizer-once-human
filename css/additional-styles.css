@@ -82,10 +82,10 @@
 #message-warning::after {
     content: '';
     position: absolute;
-    top: 1px;
+    top: 1.5px;
     left: 50%;
     transform: translateX(-50%);
-    border-width: 0 9px 10px 9px;
+    border-width: 0 10px 10px 10px;
     border-style: solid;
     border-color: transparent transparent var(--main-btn) transparent;
     z-index: 9999;
