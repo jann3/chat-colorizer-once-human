@@ -5,6 +5,13 @@ const charCounter = document.getElementById('char-counter');
 const charLimit = 130;
 let selectedColor = colorPicker.value;
 
+const blurElements = [
+    document.querySelector('.output-container'),
+    document.querySelector('h1'),
+    document.querySelector('ol'),
+    document.querySelector('footer')
+];
+
 colorPicker.addEventListener('input', () => {
     selectedColor = colorPicker.value;
 });
@@ -45,27 +52,15 @@ function applyColor() {
 }
 
 function focusInput() {
-    const code = document.getElementsByClassName('output-container');
-    const heading1 = document.getElementsByTagName('h1');
-    const list1 = document.getElementsByTagName('ol');
-    const footer = document.getElementsByTagName('footer');
-
-    code[0].classList.add('blurred');
-    heading1[0].classList.add('blurred');
-    list1[0].classList.add('blurred');
-    footer[0].classList.add('blurred');
+    blurElements.forEach(el => {
+        el.classList.add('blurred');
+    });
 }
 
 function blurInput() {
-    const code = document.getElementsByClassName('output-container');
-    const heading1 = document.getElementsByTagName('h1');
-    const list1 = document.getElementsByTagName('ol');
-    const footer = document.getElementsByTagName('footer');
-
-    code[0].classList.remove('blurred');
-    heading1[0].classList.remove('blurred');
-    list1[0].classList.remove('blurred');
-    footer[0].classList.remove('blurred');
+    blurElements.forEach(el => {
+        el.classList.remove('blurred');
+    });
 }
 
 function closePopup() {
