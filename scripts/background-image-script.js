@@ -6,8 +6,10 @@ const backgroundImages = [
 ];
 
 function setRandomBackgroundImage() {
-    const randomIndex = Math.floor(Math.random() * backgroundImages.length);
-    document.body.style.backgroundImage = `url(${backgroundImages[randomIndex]})`;
+    if (document.documentElement) {
+        const randomIndex = Math.floor(Math.random() * backgroundImages.length);
+        document.body.style.backgroundImage = `url(${backgroundImages[randomIndex]})`;
+    }
 }
 
 setRandomBackgroundImage();
