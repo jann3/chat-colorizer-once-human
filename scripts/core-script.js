@@ -15,7 +15,8 @@ function applyColor() {
     if (selection.rangeCount === 0) {
         const popup = document.getElementById('message-warning');
         try {
-            popup.togglePopover();
+            popup.showPopover();
+            focusInput();
         } catch (err) {
             console.log(err);
         }
@@ -25,7 +26,8 @@ function applyColor() {
     if (range.collapsed) {
         const popup = document.getElementById('message-warning');
         try {
-            popup.togglePopover();
+            popup.showPopover();
+            focusInput();
         } catch (err) {
             console.log(err);
         }
@@ -33,12 +35,37 @@ function applyColor() {
     }
 
     closePopup();
+    blurInput();
 
     const span = document.createElement('span');
     span.style.color = selectedColor;
     range.surroundContents(span);
 
     updateOutputCode();
+}
+
+function focusInput() {
+    const code = document.getElementsByClassName('output-container');
+    const heading1 = document.getElementsByTagName('h1');
+    const list1 = document.getElementsByTagName('ol');
+    const footer = document.getElementsByTagName('footer');
+
+    code[0].classList.add('blurred');
+    heading1[0].classList.add('blurred');
+    list1[0].classList.add('blurred');
+    footer[0].classList.add('blurred');
+}
+
+function blurInput() {
+    const code = document.getElementsByClassName('output-container');
+    const heading1 = document.getElementsByTagName('h1');
+    const list1 = document.getElementsByTagName('ol');
+    const footer = document.getElementsByTagName('footer');
+
+    code[0].classList.remove('blurred');
+    heading1[0].classList.remove('blurred');
+    list1[0].classList.remove('blurred');
+    footer[0].classList.remove('blurred');
 }
 
 function closePopup() {
