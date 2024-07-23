@@ -147,6 +147,18 @@ textarea:focus,
     #confirm-message>div {
         white-space: normal;
     }
+
+    h2 {
+        margin: 10px 0 5px 0;
+    }
+
+    .background {
+        padding: 0 8px 0 8px;
+    }
+
+    .message-input {
+        padding: 10px 5px 10px 10px;
+    }
 }
 
 @media (max-width: 200px) {
@@ -169,4 +181,14 @@ textarea:focus,
         justify-content: center;
     }
 
+    .background {
+        padding: 0 5px 0 5px;
+    }
+
+}
+
+@media (orientation: landscape) {
+    .output-code {
+        height: 4rem;
+    }
 }
