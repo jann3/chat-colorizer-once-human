@@ -192,3 +192,22 @@ textarea:focus,
         height: 4rem;
     }
 }
+
+@media (max-height: 500px) and (orientation: landscape) {
+    ol {
+        list-style-type: none;
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        padding: 0;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+    }
+
+    li:not(:last-of-type) {
+        border: 1px solid var(--main-font);
+        border-width: 0 1px 0 0;
+        padding-right: 1rem;
+    }
+}
