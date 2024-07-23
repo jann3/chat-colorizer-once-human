@@ -87,7 +87,8 @@ input[type="text"] {
 .color-picker-container {
     display: flex;
     align-items: center;
-    gap: 4px;
+    margin-top: 2px;
+    gap: 8px;
 }
 
 .output-footer {
