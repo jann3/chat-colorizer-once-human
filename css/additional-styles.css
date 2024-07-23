@@ -1,3 +1,36 @@
+h1,
+h2 {
+    text-shadow: 0 0 3px var(--main-bg);
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0;
+}
+
+button:hover,
+button:active,
+button:focus,
+input[type="color"]:hover,
+input[type="color"]:active,
+input[type="color"]:focus {
+    background-color: var(--main-hover);
+}
+
+button:focus,
+input:focus,
+textarea:focus,
+.message-input:focus {
+    outline: 2px solid var(--main-focus);
+}
+
 #message-warning,
 #confirm-message {
     isolation: isolate;
