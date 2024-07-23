@@ -193,6 +193,10 @@ textarea:focus,
     }
 }
 
+footer>span {
+    cursor: pointer;
+}
+
 @media (max-height: 500px) and (orientation: landscape) {
     ol {
         list-style-type: none;
