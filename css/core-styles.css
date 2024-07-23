@@ -1,6 +1,7 @@
 :root {
     --main-bg: #21202b;
     --main-btn: #181722;
+    --main-hover: #201e34;
     --main-font: #ffffff;
     --warn-font: #ff1169;
     --main-focus: #28a3cf;
@@ -119,6 +120,15 @@ input[type="color"] {
     height: 2rem;
     font-size: 1rem;
     cursor: pointer;
+}
+
+button:hover,
+button:active,
+button:focus,
+input[type="color"]:hover,
+input[type="color"]:active,
+input[type="color"]:focus {
+    background-color: var(--main-hover);
 }
 
 input[type="color"] {
