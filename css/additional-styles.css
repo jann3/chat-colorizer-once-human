@@ -129,9 +129,18 @@ textarea:focus,
     border-color: transparent;
 }
 
+.blurred {
+    opacity: 0.3;
+    filter: blur(2px);
+}
+
 @media (max-width: 380px) {
     .collapse {
         display: none;
+    }
+
+    ol {
+        padding: 0 0 0 1rem;
     }
 
     #message-warning>div,
@@ -140,7 +149,24 @@ textarea:focus,
     }
 }
 
-.blurred {
-    opacity: 0.3;
-    filter: blur(2px);
+@media (max-width: 200px) {
+    .color-picker-container {
+        flex-direction: column;
+    }
+
+    .color-picker-container>button,
+    .color-picker-container>input {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .output-footer {
+        flex-direction: column;
+    }
+
+    .output-footer>button {
+        width: 100%;
+        justify-content: center;
+    }
+
 }
