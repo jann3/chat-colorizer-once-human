@@ -53,7 +53,7 @@ h2 {
 
 .message-input {
     font-size: 16px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--main-font);
     padding: 10px;
     overflow-wrap: break-word;
     text-shadow: 0 0 1px #000, 0 0 3px #000;
@@ -122,7 +122,7 @@ input[type="color"] {
     -webkit-appearance: none;
     border: 1px solid var(--main-font);
     border-radius: 0.5rem;
-    width: 2rem;
+    width: clamp(2rem, -0.5rem + 8vw, 3rem);
 }
 
 button {
