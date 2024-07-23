@@ -118,10 +118,23 @@ textarea:focus,
     top: 1.5px;
     left: 50%;
     transform: translateX(-50%);
-    border-width: 0 10px 10px 10px;
+    border-width: 0 15px 15px 15px;
     border-style: solid;
     border-color: transparent transparent var(--main-btn) transparent;
     z-index: 9999;
+}
+
+#message-warning>div>span::before {
+    content: '';
+    position: absolute;
+    top: 2.5px;
+    left: 50%;
+    transform: translateX(-50%);
+    filter: blur(2px);
+    border-width: 0 12px 7px 12px;
+    border-style: solid;
+    border-color: transparent transparent var(--main-focus) transparent;
+    z-index: 9997;
 }
 
 [popover] {
