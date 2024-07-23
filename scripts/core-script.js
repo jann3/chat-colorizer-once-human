@@ -140,11 +140,15 @@ function switchBackgroundImage() {
     const currentBackgroundImage = getComputedStyle(bodyElement).backgroundImage;
     console.log(`current image ${currentBackgroundImage}`);
 
-    const matches = currentBackgroundImage.match(/\/([^\/]+)\)$/);
-    const currentImageName = matches ? matches[1] : null;
+    const matches = currentBackgroundImage.match(/url\("?(.+?)"?\)$/);
+    let currentImageName = matches ? matches[1] : null;
 
-    const currentIndex = backgroundImages.findIndex(image => image.includes(currentImageName));
+    if (currentImageName) {
+        const url = new URL(currentImageName);
+        currentImageName = url.pathname.replace(/^\//, '');
+    }
 
+    const currentIndex = backgroundImages.findIndex(image => currentImageName.includes(image));
     let newIndex;
 
     if (currentIndex !== -1) {
