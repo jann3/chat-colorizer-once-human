@@ -136,9 +136,7 @@ function switchBackgroundImage() {
     }
 
     const bodyElement = document.body;
-
     const currentBackgroundImage = getComputedStyle(bodyElement).backgroundImage;
-    console.log(`current image ${currentBackgroundImage}`);
 
     const matches = currentBackgroundImage.match(/url\("?(.+?)"?\)$/);
     let currentImageName = matches ? matches[1] : null;
