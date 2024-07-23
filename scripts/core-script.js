@@ -49,6 +49,7 @@ function applyColor() {
     range.surroundContents(span);
 
     updateOutputCode();
+    blurOnUpdate();
 }
 
 function focusInput() {
@@ -61,6 +62,11 @@ function blurInput() {
     blurElements.forEach(el => {
         el.classList.remove('blurred');
     });
+}
+
+function blurOnUpdate() {
+    if (window.getSelection) { window.getSelection().removeAllRanges(); }
+    else if (document.selection) { document.selection.empty(); }
 }
 
 function closePopup() {
