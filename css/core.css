@@ -27,7 +27,10 @@ body {
     min-height: 100svh;
     display: flex;
     flex-direction: column;
-    animation: fadeInBackground 2s ease-in-out forwards;
+}
+
+.fade-in {
+    animation: fadeInBackground-1 2s ease-in-out forwards;
 }
 
 ol {
@@ -151,7 +154,17 @@ footer span {
     color: var(--warn-font);
 }
 
-@keyframes fadeInBackground {
+@keyframes fadeInBackground-1 {
+    0% {
+        background-color: rgba(33, 32, 43, 1);
+    }
+
+    100% {
+        background-color: rgba(33, 32, 43, 0.69);
+    }
+}
+
+@keyframes fadeInBackground-2 {
     0% {
         background-color: rgba(33, 32, 43, 1);
     }
