@@ -126,4 +126,34 @@ function copyCode() {
     }
 }
 
+function switchBackgroundImage() {
+    const backgroundStyle = document.getElementsByClassName('fade-in')[0].style;
+
+    if (backgroundStyle.animationName == 'fadeInBackground-1') {
+        backgroundStyle.animationName = 'fadeInBackground-2'
+    } else {
+        backgroundStyle.animationName = 'fadeInBackground-1'
+    }
+
+    const bodyElement = document.body;
+
+    const currentBackgroundImage = getComputedStyle(bodyElement).backgroundImage;
+    console.log(`current image ${currentBackgroundImage}`);
+
+    const matches = currentBackgroundImage.match(/\/([^\/]+)\)$/);
+    const currentImageName = matches ? matches[1] : null;
+
+    const currentIndex = backgroundImages.findIndex(image => image.includes(currentImageName));
+
+    let newIndex;
+
+    if (currentIndex !== -1) {
+        newIndex = (currentIndex + 1) % backgroundImages.length;
+    } else {
+        newIndex = 0;
+    }
+    bodyElement.style.backgroundImage = `url(${backgroundImages[newIndex]})`;
+}
+
+
 messageInput.addEventListener('input', updateOutputCode);
