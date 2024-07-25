@@ -91,6 +91,10 @@ input[type="text"] {
     gap: 8px;
 }
 
+.color-picker-container button:last-child {
+    margin-left: auto;
+}
+
 .output-footer {
     display: flex;
     flex-direction: row;
