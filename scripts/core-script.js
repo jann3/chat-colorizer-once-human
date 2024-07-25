@@ -163,5 +163,14 @@ function switchBackgroundImage() {
     bodyElement.style.backgroundImage = `url(${backgroundImages[newIndex]})`;
 }
 
+function resetInput() {
+    const input = document.getElementById('message-input');
+    const output = document.getElementById('output-code');
+    const color = document.getElementById('color-picker');
+
+    input.innerHTML = '';
+    output.value = '';
+    color.value = '#ffffff';
+}
 
 messageInput.addEventListener('input', updateOutputCode);
