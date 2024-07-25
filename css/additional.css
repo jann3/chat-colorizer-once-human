@@ -15,11 +15,15 @@ input[type="color"]::-webkit-color-swatch-wrapper {
     padding: 0;
 }
 
-button:hover,
+
 button:active,
+input[type="color"]:active {
+    background-color: var(--main-bg);
+}
+
+button:hover,
 button:focus,
 input[type="color"]:hover,
-input[type="color"]:active,
 input[type="color"]:focus {
     background-color: var(--main-hover);
 }
@@ -174,7 +178,7 @@ textarea:focus,
     }
 }
 
-@media (max-width: 200px) {
+@media (max-width: 240px) {
     .color-picker-container {
         flex-direction: column;
     }
@@ -197,7 +201,6 @@ textarea:focus,
     .background {
         padding: 0 5px 0 5px;
     }
-
 }
 
 @media (orientation: landscape) {
