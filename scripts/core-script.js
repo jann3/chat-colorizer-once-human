@@ -1,42 +1,12 @@
-const colorPicker = document.getElementById('color-picker');
-const messageInput = document.getElementById('message-input');
-const outputCode = document.getElementById('output-code');
-const charCounter = document.getElementById('char-counter');
-const charLimit = 130;
-let selectedColor = colorPicker.value;
-
-const blurElements = [
-    document.querySelector('.output-container'),
-    document.querySelector('h1'),
-    document.querySelector('ol'),
-    document.querySelector('footer')
-];
-
-colorPicker.addEventListener('input', () => {
-    selectedColor = colorPicker.value;
-});
-
-function applyColor() {
+const applyColor = () => {
     const selection = window.getSelection();
-
-    if (selection.rangeCount === 0) {
-        const popup = document.getElementById('message-warning');
+    const popup = document.getElementById('message-warning');
+    if (selection.rangeCount === 0 || selection.getRangeAt(0).collapsed) {
         try {
             popup.showPopover();
             focusInput();
         } catch (err) {
-            console.log(err);
-        }
-        return;
-    }
-    const range = selection.getRangeAt(0);
-    if (range.collapsed) {
-        const popup = document.getElementById('message-warning');
-        try {
-            popup.showPopover();
-            focusInput();
-        } catch (err) {
-            console.log(err);
+            console.error(err);
         }
         return;
     }
@@ -46,49 +16,47 @@ function applyColor() {
 
     const span = document.createElement('span');
     span.style.color = selectedColor;
-    range.surroundContents(span);
+    selection.getRangeAt(0).surroundContents(span);
 
     updateOutputCode();
     blurOnUpdate();
-}
+};
 
-function focusInput() {
-    blurElements.forEach(el => {
-        el.classList.add('blurred');
-    });
-}
+const focusInput = () => {
+    blurElements.forEach(el => el.classList.add('blurred'));
+};
 
-function blurInput() {
-    blurElements.forEach(el => {
-        el.classList.remove('blurred');
-    });
-}
+const blurInput = () => {
+    blurElements.forEach(el => el.classList.remove('blurred'));
+};
 
-function blurOnUpdate() {
-    if (window.getSelection) { window.getSelection().removeAllRanges(); }
-    else if (document.selection) { document.selection.empty(); }
-}
-
-function closePopup() {
-    try {
-        const popup = document.getElementById('message-warning');
-        popup.hidePopover();
-    } catch (err) {
-        console.log(err);
+const blurOnUpdate = () => {
+    const selection = window.getSelection();
+    if (selection) {
+        selection.removeAllRanges();
+    } else if (document.selection) {
+        document.selection.empty();
     }
-}
+};
 
-function updateOutputCode() {
-    const output = document.getElementById('output-code');
+const closePopup = () => {
+    try {
+        document.getElementById('message-warning').hidePopover();
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+const updateOutputCode = () => {
     const html = messageInput.innerHTML;
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = html;
     const coloredText = convertToColoredText(tempDiv);
-    output.value = coloredText;
+    outputCode.value = coloredText;
     updateCharCounter(coloredText.length);
-}
+};
 
-function convertToColoredText(node, currentColor = '') {
+const convertToColoredText = (node, currentColor = '') => {
     if (node.nodeType === Node.TEXT_NODE) {
         return node.nodeValue;
     }
