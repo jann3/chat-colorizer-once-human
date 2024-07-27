@@ -59,8 +59,8 @@
 		</ol>
 		<div class="message-container">
 			<div id="message-input" class="message-input" contenteditable="true"
-				data-placeholder="Type your message here..." spellcheck="true" onfocus="closePopup()"
-				oninput="updateOutputCode()" aria-label="Message Input" role="textbox"></div>
+				data-placeholder="Type your message here..." spellcheck="true" aria-label="Message Input"
+				role="textbox"></div>
 			<div id="message-warning" popover role="alert">
 				<div>
 					<span>Please select text then apply</span>
@@ -72,8 +72,8 @@
 		<div class="color-picker-container">
 			<label for="color-picker">Color:</label>
 			<input type="color" id="color-picker" value="#ffffff">
-			<button onclick="applyColor()" onblur="blurInput()" id="apply-button">Apply</button>
-			<button onclick="resetInput()" id="reset-button">Reset</button>
+			<button id="apply-button">Apply</button>
+			<button id="reset-button">Reset</button>
 		</div>
 
 		<div class="output-container">
@@ -81,8 +81,8 @@
 			<textarea id="output-code" class="output-code" readonly maxlength="130" aria-labelledby="output-heading"
 				title="Output Code"></textarea>
 			<div class="output-footer">
-				<button onclick="copyCode()" id="copy-code" aria-label="copy output code"><img
-						src="icons/copy-regular.svg" alt="Copy" role="presentation">Copy</button>
+				<button id="copy-code" aria-label="copy output code"><img src="icons/copy-regular.svg" alt="Copy"
+						role="presentation">Copy</button>
 				<div class="char-counter" id="char-counter" aria-label="character limit counter" aria-live="polite">
 					0/130<span class="collapse"> characters</span></div>
 			</div>
@@ -90,7 +90,7 @@
 				<div>Copied to clipboard</div>
 			</div>
 		</div>
-		<footer>Please use considerately <span aria-label="heart" onclick="switchBackgroundImage()">&lt;3</span>
+		<footer>Please use considerately <span aria-label="heart">&lt;3</span>
 		</footer>
 
 	</div>
