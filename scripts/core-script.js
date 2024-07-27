@@ -69,76 +69,92 @@ const convertToColoredText = (node, currentColor = '') => {
     }
 
     return Array.from(node.childNodes).map(child => convertToColoredText(child, currentColor)).join('');
-}
+};
 
-function rgbToHex(rgb) {
+const rgbToHex = (rgb) => {
     const rgbValues = rgb.match(/\d+/g).map(Number);
     return `#c${((1 << 24) + (rgbValues[0] << 16) + (rgbValues[1] << 8) + rgbValues[2]).toString(16).slice(1).toUpperCase()}`;
-}
+};
 
-function updateCharCounter(length) {
-    const style = getComputedStyle(document.body);
-
+const updateCharCounter = (length) => {
     charCounter.innerHTML = `${length}/${charLimit}<span class="collapse"> characters</span>`;
-    if (length > charLimit) {
-        charCounter.style.color = style.getPropertyValue('--warn-font');
-    } else {
-        charCounter.style.color = style.getPropertyValue('--main-font');
-    }
-}
+    charCounter.style.color = length > charLimit ? warnFont : defaultFont;
+};
 
-function copyCode() {
-    const code = document.getElementById('output-code');
-    code.select();
-    code.setSelectionRange(0, 130);
-    navigator.clipboard.writeText(code.value);
-    const popup = document.getElementById('confirm-message');
+const copyCode = () => {
+    outputCode.select();
+    outputCode.setSelectionRange(0, 130);
+    navigator.clipboard.writeText(outputCode.value);
     try {
-        popup.togglePopover();
+        const popover = document.getElementById('confirm-message')
+        popover.togglePopover();
+        setTimeout(() => {
+            popover.hidePopover();
+        }, "1200");
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
-}
+    copyCodeButton.focus();
+};
 
-function switchBackgroundImage() {
-    const backgroundStyle = document.getElementsByClassName('fade-in')[0].style;
+const switchBackgroundImage = () => {
+    const backgroundStyle = document.querySelector('.fade-in').style;
+    backgroundStyle.animationName = backgroundStyle.animationName === 'fadeInBackground-1' ? 'fadeInBackground-2' : 'fadeInBackground-1';
 
-    if (backgroundStyle.animationName == 'fadeInBackground-1') {
-        backgroundStyle.animationName = 'fadeInBackground-2'
-    } else {
-        backgroundStyle.animationName = 'fadeInBackground-1'
-    }
-
-    const bodyElement = document.body;
-    const currentBackgroundImage = getComputedStyle(bodyElement).backgroundImage;
-
+    const currentBackgroundImage = getComputedStyle(document.body).backgroundImage;
     const matches = currentBackgroundImage.match(/url\("?(.+?)"?\)$/);
-    let currentImageName = matches ? matches[1] : null;
+    let currentImageName = matches ? new URL(matches[1]).pathname.replace(/^\//, '') : null;
 
-    if (currentImageName) {
-        const url = new URL(currentImageName);
-        currentImageName = url.pathname.replace(/^\//, '');
-    }
+    const currentIndex = backgroundImages.findIndex(image => currentImageName?.includes(image));
+    const newIndex = currentIndex !== -1 ? (currentIndex + 1) % backgroundImages.length : 0;
+    document.body.style.backgroundImage = `url(${backgroundImages[newIndex]})`;
+};
 
-    const currentIndex = backgroundImages.findIndex(image => currentImageName.includes(image));
-    let newIndex;
+const resetInput = () => {
+    messageInput.innerHTML = '';
+    outputCode.value = '';
+    colorPicker.value = '#ffffff';
+};
 
-    if (currentIndex !== -1) {
-        newIndex = (currentIndex + 1) % backgroundImages.length;
-    } else {
-        newIndex = 0;
-    }
-    bodyElement.style.backgroundImage = `url(${backgroundImages[newIndex]})`;
-}
+const colorPicker = document.getElementById('color-picker');
+const messageInput = document.getElementById('message-input');
+const outputCode = document.getElementById('output-code');
+const charCounter = document.getElementById('char-counter');
+const applyButton = document.getElementById('apply-button');
+const resetButton = document.getElementById('reset-button');
+const copyCodeButton = document.getElementById('copy-code');
+const heartButton = document.querySelector('footer span[aria-label="heart"]');
+const charLimit = 130;
+let selectedColor = colorPicker.value;
 
-function resetInput() {
-    const input = document.getElementById('message-input');
-    const output = document.getElementById('output-code');
-    const color = document.getElementById('color-picker');
+const rootStlye = getComputedStyle(document.body);
+const warnFont = rootStlye.getPropertyValue('--warn-font');
+const defaultFont = rootStlye.getPropertyValue('--main-font');
 
-    input.innerHTML = '';
-    output.value = '';
-    color.value = '#ffffff';
-}
+const blurElements = [
+    document.querySelector('.output-container'),
+    document.querySelector('h1'),
+    document.querySelector('ol'),
+    document.querySelector('footer')
+];
+
+colorPicker.addEventListener('input', () => {
+    selectedColor = colorPicker.value;
+});
 
 messageInput.addEventListener('input', updateOutputCode);
+messageInput.addEventListener('focus', () => {
+    closePopup();
+    blurInput();
+});
+
+applyButton.addEventListener('click', () => {
+    applyColor();
+});
+applyButton.addEventListener('blur', () => {
+    blurInput();
+});
+
+resetButton.addEventListener('click', resetInput);
+copyCodeButton.addEventListener('click', copyCode);
+heartButton.addEventListener('click', switchBackgroundImage);
