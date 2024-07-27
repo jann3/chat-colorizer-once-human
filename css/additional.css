@@ -146,6 +146,27 @@ textarea:focus,
     border-color: transparent;
 }
 
+[popover]:popover-open {
+    opacity: 1;
+}
+
+[popover] {
+    font-size: 1.2rem;
+    padding: 10px;
+    opacity: 0;
+    transition:
+        opacity 0.3s,
+        transform 0.3s,
+        overlay 0.3s allow-discrete,
+        display 0.3s allow-discrete;
+}
+
+@starting-style {
+    [popover]:popover-open {
+        opacity: 0;
+    }
+}
+
 .blurred {
     opacity: 0.3;
     filter: blur(2px);
