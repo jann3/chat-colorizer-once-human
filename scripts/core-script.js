@@ -58,6 +58,9 @@ const updateOutputCode = () => {
 
 const convertToColoredText = (node, currentColor = '') => {
     if (node.nodeType === Node.TEXT_NODE) {
+        if (node.nodeValue.includes('#')) {
+            return node.nodeValue.replace(/#/g, '##');
+        }
         return node.nodeValue;
     }
 
