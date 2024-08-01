@@ -211,7 +211,6 @@ select:focus {
     }
 }
 
-
 @media (max-width: 240px) {
     .color-picker-container {
         flex-direction: column;
