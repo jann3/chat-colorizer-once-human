@@ -91,7 +91,14 @@ input[type="text"] {
     gap: 8px;
 }
 
+.theme-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .color-picker-container button:last-child {
+    align-self: flex-start;
     margin-left: auto;
 }
 
@@ -103,7 +110,8 @@ input[type="text"] {
 }
 
 button,
-input {
+input,
+select {
     color: var(--main-font);
     padding: 4px;
     background-color: var(--main-btn);
@@ -111,13 +119,15 @@ input {
 
 input,
 textarea,
-button {
+button,
+select {
     border-radius: 0.5rem;
     border: 1px solid var(--main-font);
 }
 
 button,
-input[type="color"] {
+input[type="color"],
+select {
     padding-left: 10px;
     padding-right: 10px;
     height: 2rem;
@@ -139,10 +149,13 @@ button {
 }
 
 button img {
-    margin-right: 0.5rem;
     width: 1rem;
     height: 1rem;
     filter: invert(1);
+}
+
+.icon-button>img {
+    margin-right: 0.5rem;
 }
 
 footer {
