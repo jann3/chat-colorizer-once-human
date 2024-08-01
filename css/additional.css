@@ -31,7 +31,8 @@ input[type="color"]:focus {
 button:focus,
 input:focus,
 textarea:focus,
-.message-input:focus {
+.message-input:focus,
+select:focus {
     outline: 2px solid var(--main-focus);
 }
 
@@ -177,6 +178,11 @@ textarea:focus,
         display: none;
     }
 
+    select {
+        width: max-content;
+        min-width: 100%;
+    }
+
     ol {
         padding: 0 0 0 1rem;
     }
@@ -198,6 +204,13 @@ textarea:focus,
         padding: 10px 5px 10px 10px;
     }
 }
+
+@media (max-width: 550px) {
+    .color-picker-container {
+        flex-wrap: wrap;
+    }
+}
+
 
 @media (max-width: 240px) {
     .color-picker-container {
