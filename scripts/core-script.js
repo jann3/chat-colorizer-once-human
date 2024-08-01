@@ -201,7 +201,7 @@ const applyPreset = () => {
         const char = text[i];
         if (char === '#') {
             if (colorSpan) {
-                colorSpan.innerHTML += '##'; // Escape # in HTML
+                colorSpan.innerHTML += '##';
             }
         } else {
             if (colorSpan) {
@@ -221,7 +221,7 @@ const hslToRgb = (h, s, l) => {
     let r, g, b;
 
     if (s === 0) {
-        r = g = b = l; // achromatic
+        r = g = b = l;
     } else {
         const hue2rgb = (p, q, t) => {
             if (t < 0) t += 1;
