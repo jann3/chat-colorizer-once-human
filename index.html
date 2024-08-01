@@ -75,16 +75,29 @@
 			<label for="color-picker">Color:</label>
 			<input type="color" id="color-picker" value="#ffffff">
 			<button id="apply-button">Apply</button>
+			<div class="theme-container">
+				<label for="preset-select" class="collapse">Theme:</label>
+				<select id="preset-select" onfocus="this.selectedIndex = -1;">
+					<option value="pastelRainbow">Pastel Rainbow</option>
+					<option value="galaxyNebula">Galaxy Nebula</option>
+					<option value="sharkPlush">Shark Plush</option>
+					<option value="vintagePoster">Vintage Poster</option>
+					<option value="randomChalk">Random Chalk</option>
+					<option value="randomHue">Random Hue</option>
+				</select>
+				<button id="apply-preset-button" class="collapse"><img src="icons/rotate-solid.svg" alt="Randomize"
+						role="presentation"></button>
+			</div>
 			<button id="reset-button">Reset</button>
 		</div>
 
 		<div class="output-container">
 			<h2 id="output-heading">Output Code</h2>
-			<textarea id="output-code" class="output-code" readonly maxlength="130" aria-labelledby="output-heading"
-				title="Output Code"></textarea>
+			<textarea id="output-code" class="output-code" readonly maxlength="130"
+				aria-labelledby="output-heading"></textarea>
 			<div class="output-footer">
-				<button id="copy-code" aria-label="copy output code"><img src="icons/copy-regular.svg" alt="Copy"
-						role="presentation">Copy</button>
+				<button id="copy-code" aria-label="copy output code" class="icon-button"><img
+						src="icons/copy-regular.svg" alt="Copy" role="presentation">Copy</button>
 				<div class="char-counter" id="char-counter" aria-label="character limit counter" aria-live="polite">
 					0/130<span class="collapse"> characters</span></div>
 			</div>
