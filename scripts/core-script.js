@@ -158,6 +158,9 @@ const applyPreset = () => {
         case 'sharkPlush':
             colors = ['#6dc2fa', '#f695f1', '#ffffff', '#f695f1', '#6dc2fa'];
             break;
+        case 'cTest':
+            colors = ['#FFFFFF', '#cFFFFF', '#ccFFFF', '#ccccFF', '#cccccc'];
+            break;
         case 'randomChalk':
             for (let i = 0; i < 7; i++) {
                 colors.push(randomHueColor(0.7, 0.8));
