@@ -73,14 +73,11 @@ const convertToColoredText = (node) => {
 };
 
 const rgbToHex = (rgb) => {
-    console.log("Converting RGB to Hex:", rgb);
     if (!rgb || !rgb.startsWith('rgb')) {
-        console.error("Invalid RGB string:", rgb);
         return '';
     }
     const rgbValues = rgb.match(/\d+/g);
     if (!rgbValues || rgbValues.length !== 3) {
-        console.error("Invalid RGB string:", rgb);
         return '';
     }
     const [r, g, b] = rgbValues.map(Number);
@@ -157,9 +154,6 @@ const applyPreset = () => {
             break;
         case 'sharkPlush':
             colors = ['#6dc2fa', '#f695f1', '#ffffff', '#f695f1', '#6dc2fa'];
-            break;
-        case 'cTest':
-            colors = ['#FFFFFF', '#cFFFFF', '#ccFFFF', '#ccccFF', '#cccccc'];
             break;
         case 'randomChalk':
             for (let i = 0; i < 7; i++) {
