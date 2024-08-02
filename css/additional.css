@@ -37,7 +37,8 @@ select:focus {
 }
 
 #message-warning,
-#confirm-message {
+#confirm-message,
+#enter-message-warning {
     isolation: isolate;
     position: absolute;
     inset: auto;
@@ -56,7 +57,8 @@ select:focus {
         anchor-name: --copy-btn-el;
     }
 
-    #message-warning {
+    #message-warning,
+    #enter-message-warning {
         position-anchor: --message-el;
         top: calc(anchor(--message-el bottom) - 0.7rem);
         left: anchor(--message-el center);
@@ -74,7 +76,8 @@ select:focus {
 @supports not (position-anchor: --anchorName) {
 
     /* target browsers that dont support anchor */
-    #message-warning {
+    #message-warning,
+    #enter-message-warning {
         translate: 12rem 2.2rem;
     }
 
@@ -94,6 +97,7 @@ select:focus {
 }
 
 #message-warning>div,
+#enter-message-warning>div,
 #confirm-message>div {
     white-space: nowrap;
     box-shadow: 0 0 5px var(--main-focus);
@@ -105,7 +109,8 @@ select:focus {
     border: 1px solid var(--main-font);
 }
 
-#message-warning::before {
+#message-warning::before,
+#enter-message-warning::before {
     content: '';
     position: absolute;
     top: 0;
@@ -117,7 +122,8 @@ select:focus {
     z-index: 9998;
 }
 
-#message-warning::after {
+#message-warning::after,
+#enter-message-warning::after {
     content: '';
     position: absolute;
     top: 1.5px;
@@ -129,7 +135,8 @@ select:focus {
     z-index: 9999;
 }
 
-#message-warning>div>span::before {
+#message-warning>div>span::before,
+#enter-message-warning>div>span::before {
     content: '';
     position: absolute;
     top: 2.5px;
