@@ -173,6 +173,13 @@ select:focus {
     filter: blur(2px);
 }
 
+@media (orientation: landscape) and (max-width: 600px) {
+
+    .collapse {
+        display: none;
+    }
+}
+
 @media (max-width: 380px) {
     .collapse {
         display: none;
