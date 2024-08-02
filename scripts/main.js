@@ -246,6 +246,29 @@ const hslToRgb = (h, s, l) => {
     return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
 };
 
+const checkApplyButton = () => {
+    const preset = presetSelect.value;
+    let randomizedSelected;
+    switch (preset) {
+        case 'randomChalk':
+            randomizedSelected = true;
+            break;
+        case 'randomHue':
+            randomizedSelected = true;
+            break;
+        default:
+            randomizedSelected = false;
+            break;
+    }
+    if (randomizedSelected) {
+        console.log(randomizedSelected);
+        applyPresetButton.disabled = false;
+    } else {
+        console.log(randomizedSelected);
+        applyPresetButton.disabled = true;
+    }
+}
+
 const colorPicker = document.getElementById('color-picker');
 const messageInput = document.getElementById('message-input');
 const outputCode = document.getElementById('output-code');
@@ -293,6 +316,9 @@ applyButton.addEventListener('blur', () => {
 resetButton.addEventListener('click', resetInput);
 copyCodeButton.addEventListener('click', copyCode);
 heartButton.addEventListener('click', switchBackgroundImage);
-presetSelect.addEventListener('change', applyPreset);
+presetSelect.addEventListener('change', () => {
+    applyPreset();
+    checkApplyButton();
+});
 presetSelect.addEventListener('focus', readyPreset);
 applyPresetButton.addEventListener('click', applyPreset);
