@@ -172,6 +172,17 @@ footer span {
     color: var(--warn-font);
 }
 
+button:disabled {
+    filter: grayscale(1);
+    opacity: 0.5;
+    cursor: auto;
+    background-color: var(--main-btn)
+}
+
+button:disabled:hover {
+    background-color: var(--main-btn)
+}
+
 @keyframes fadeInBackground-1 {
     0% {
         background-color: rgba(33, 32, 43, 1);
