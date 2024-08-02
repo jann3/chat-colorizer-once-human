@@ -22,6 +22,13 @@ const applyColor = () => {
     blurOnUpdate();
 };
 
+const checkMessageInputLength = () => {
+    const message = messageInput.textContent.trim();
+    if (message.length === 0) {
+        resetInput();
+    }
+};
+
 const focusInput = () => {
     blurElements.forEach(el => el.classList.add('blurred'));
 };
@@ -267,7 +274,10 @@ colorPicker.addEventListener('input', () => {
     selectedColor = colorPicker.value;
 });
 
-messageInput.addEventListener('input', updateOutputCode);
+messageInput.addEventListener('input', () => {
+    checkMessageInputLength();
+    updateOutputCode();
+});
 messageInput.addEventListener('focus', () => {
     closePopup();
     blurInput();
