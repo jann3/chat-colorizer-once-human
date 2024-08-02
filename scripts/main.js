@@ -261,11 +261,18 @@ const checkApplyButton = () => {
             break;
     }
     if (randomizedSelected) {
-        console.log(randomizedSelected);
         applyPresetButton.disabled = false;
     } else {
-        console.log(randomizedSelected);
         applyPresetButton.disabled = true;
+    }
+    const message = messageInput.textContent.trim();
+    const popup = document.getElementById('enter-message-warning');
+
+    if (message.length === 0) {
+        setTimeout(() => {
+            focusInput();
+            popup.showPopover();
+        }, "70");
     }
 }
 
@@ -320,5 +327,7 @@ presetSelect.addEventListener('change', () => {
     applyPreset();
     checkApplyButton();
 });
+presetSelect.addEventListener('click', blurInput);
+presetSelect.addEventListener('blur', blurInput);
 presetSelect.addEventListener('focus', readyPreset);
 applyPresetButton.addEventListener('click', applyPreset);
