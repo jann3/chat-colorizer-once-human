@@ -48,7 +48,6 @@ select:focus {
 
 @supports(position-anchor: --anchorName) {
 
-    /* target Browsers which support CSS anchor */
     .message-input {
         anchor-name: --message-el;
     }
@@ -75,7 +74,6 @@ select:focus {
 
 @supports not (position-anchor: --anchorName) {
 
-    /* target browsers that dont support anchor */
     #message-warning,
     #enter-message-warning {
         translate: 12rem 2.2rem;
@@ -86,7 +84,9 @@ select:focus {
     }
 
     @media (max-width: 530px) {
-        #message-warning {
+
+        #message-warning,
+        #enter-message-warning {
             translate: -0.45rem 2.2rem;
         }
 
@@ -181,7 +181,6 @@ select:focus {
 }
 
 @media (orientation: landscape) and (max-width: 600px) {
-
     .collapse {
         display: none;
     }
@@ -190,6 +189,10 @@ select:focus {
 @media (max-width: 380px) {
     .collapse {
         display: none;
+    }
+
+    .message-input[contenteditable]:empty:before {
+        content: attr(data-min-placeholder);
     }
 
     select {
@@ -207,11 +210,11 @@ select:focus {
     }
 
     h2 {
-        margin: 10px 0 5px 0;
+        margin: 10px 0 5px;
     }
 
     .background {
-        padding: 0 8px 0 8px;
+        padding: 0 8px;
     }
 
     .message-input {
