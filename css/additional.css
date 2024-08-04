@@ -258,7 +258,7 @@ select:focus {
 
 @media (orientation: landscape) {
     .output-code {
-        height: 4rem;
+        height: 5rem;
     }
 }
 
