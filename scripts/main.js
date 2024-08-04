@@ -1,12 +1,13 @@
 const applyColor = () => {
     const selection = window.getSelection();
     const popup = document.getElementById('message-warning');
+
     if (selection.rangeCount === 0 || selection.getRangeAt(0).collapsed) {
         try {
             popup.showPopover();
             focusInput();
         } catch (err) {
-            console.error(err);
+            console.error("Error showing popover:", err);
         }
         return;
     }
@@ -14,12 +15,195 @@ const applyColor = () => {
     closePopup();
     blurInput();
 
-    const span = document.createElement('span');
-    span.style.color = selectedColor;
-    selection.getRangeAt(0).surroundContents(span);
+    const range = selection.getRangeAt(0);
+    const startContainer = range.startContainer;
+    const endContainer = range.endContainer;
+
+    console.log("Initial state of #message-input:", document.getElementById('message-input').innerHTML);
+
+    console.log("Range Start Container:", startContainer);
+    console.log("Range End Container:", endContainer);
+
+    const handleTextNode = (node, startOffset, endOffset) => {
+        if (node.nodeType !== Node.TEXT_NODE) {
+            console.error("Expected a text node but found:", node);
+            return;
+        }
+        console.log("Handling text node:", node);
+
+        const fullText = node.textContent;
+        const beforeText = fullText.slice(0, startOffset);
+        const selectedText = fullText.slice(startOffset, endOffset);
+        const afterText = fullText.slice(endOffset);
+
+        const fragment = document.createDocumentFragment();
+
+        if (beforeText) {
+            const beforeNode = document.createTextNode(beforeText);
+            fragment.appendChild(beforeNode);
+        }
+
+        if (selectedText) {
+            const span = document.createElement('span');
+            span.style.color = selectedColor;
+            span.textContent = selectedText;
+            fragment.appendChild(span);
+        }
+
+        if (afterText) {
+            const afterNode = document.createTextNode(afterText);
+            fragment.appendChild(afterNode);
+        }
+
+        node.replaceWith(fragment);
+        console.log("State of #message-input after handling text node:", document.getElementById('message-input').innerHTML);
+    };
+
+    const splitSpan = (span, startOffset, endOffset) => {
+        if (span.nodeType !== Node.ELEMENT_NODE || span.tagName !== 'SPAN') {
+            console.error("Expected a span element but found:", span);
+            return;
+        }
+        console.log("Splitting span:", span);
+
+        const fullText = span.textContent;
+        const beforeText = fullText.slice(0, startOffset);
+        const selectedText = fullText.slice(startOffset, endOffset);
+        const afterText = fullText.slice(endOffset);
+
+        const fragment = document.createDocumentFragment();
+
+        if (beforeText) {
+            const beforeSpan = span.cloneNode();
+            beforeSpan.textContent = beforeText;
+            fragment.appendChild(beforeSpan);
+        }
+
+        if (selectedText) {
+            const selectedSpan = document.createElement('span');
+            selectedSpan.style.color = selectedColor;
+            selectedSpan.textContent = selectedText;
+            fragment.appendChild(selectedSpan);
+        }
+
+        if (afterText) {
+            const afterSpan = span.cloneNode();
+            afterSpan.textContent = afterText;
+            fragment.appendChild(afterSpan);
+        }
+
+        span.replaceWith(fragment);
+        console.log("State of #message-input after splitting span:", document.getElementById('message-input').innerHTML);
+    };
+
+    const processNodesInRange = (range) => {
+        const walker = document.createTreeWalker(
+            range.commonAncestorContainer,
+            NodeFilter.SHOW_TEXT,
+            {
+                acceptNode: (node) => {
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            },
+            false
+        );
+
+        const nodesToProcess = [];
+        let currentNode = walker.currentNode;
+
+        while (currentNode) {
+            const isStartNode = currentNode === startContainer;
+            const isEndNode = currentNode === endContainer;
+
+            if (isStartNode && isEndNode) {
+                nodesToProcess.push({ node: currentNode, startOffset: range.startOffset, endOffset: range.endOffset });
+                break;
+            } else if (isStartNode) {
+                nodesToProcess.push({ node: currentNode, startOffset: range.startOffset, endOffset: currentNode.textContent.length });
+            } else if (isEndNode) {
+                nodesToProcess.push({ node: currentNode, startOffset: 0, endOffset: range.endOffset });
+                break;
+            } else {
+                nodesToProcess.push({ node: currentNode, startOffset: 0, endOffset: currentNode.textContent.length });
+            }
+            currentNode = walker.nextNode();
+        }
+
+        logNodesProcessing(nodesToProcess);
+
+        nodesToProcess.forEach(({ node, startOffset, endOffset }) => {
+            const parentElement = node.parentElement;
+            if (parentElement && parentElement.tagName === 'SPAN' && parentElement.style.color) {
+                splitSpan(parentElement, startOffset, endOffset);
+            } else {
+                handleTextNode(node, startOffset, endOffset);
+            }
+        });
+
+        console.log("State of #message-input after processing nodes:", document.getElementById('message-input').innerHTML);
+    };
+
+    processNodesInRange(range);
+
+    console.log("State of #message-input before merging spans:", document.getElementById('message-input').innerHTML);
+
+    mergeAdjacentSpans();
+
+    console.log("State of #message-input after merging spans:", document.getElementById('message-input').innerHTML);
 
     updateOutputCode();
     blurOnUpdate();
+};
+
+const mergeAdjacentSpans = () => {
+    const messageInput = document.getElementById('message-input');
+    if (!messageInput) {
+        console.error("No message-input element found.");
+        return;
+    }
+
+    const spans = Array.from(messageInput.querySelectorAll('span'));
+    if (!spans.length) {
+        console.log("No spans found for merging.");
+        return;
+    }
+
+    console.log("Spans found:", spans);
+
+    let i = 0;
+    while (i < spans.length - 1) {
+        const currentSpan = spans[i];
+        const nextSpan = spans[i + 1];
+
+        console.log("Current Span:", currentSpan);
+        console.log("Next Span:", nextSpan);
+
+        if (currentSpan.textContent === "" || nextSpan.textContent === "") {
+            i++;
+            continue;
+        }
+
+        if (currentSpan.style.color === nextSpan.style.color) {
+            currentSpan.textContent += nextSpan.textContent;
+            nextSpan.remove();
+            spans.splice(i + 1, 1); // Remove the merged span from the array
+        } else {
+            i++;
+        }
+    }
+};
+
+// Debug logging function to track the processing of nodes
+const logNodesProcessing = (nodesToProcess) => {
+    console.log("Nodes to process:");
+    nodesToProcess.forEach(({ node, startOffset, endOffset }) => {
+        console.log({
+            node: node,
+            startOffset: startOffset,
+            endOffset: endOffset,
+            textContent: node.textContent
+        });
+    });
 };
 
 const checkMessageInputLength = () => {
@@ -138,7 +322,7 @@ const randomHueColor = (saturation, lightness) => {
     return rgbToHex(`rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`);
 };
 
-const readyPreset = () => {
+const readyPreset = (event) => {
     presetSelect.selectedIndex = -1;
 }
 
@@ -272,7 +456,7 @@ const checkApplyButton = () => {
         setTimeout(() => {
             focusInput();
             popup.showPopover();
-        }, "70");
+        }, '70');
     }
 }
 
@@ -327,7 +511,9 @@ presetSelect.addEventListener('change', () => {
     applyPreset();
     checkApplyButton();
 });
-presetSelect.addEventListener('click', blurInput);
+presetSelect.addEventListener('click', () => {
+    blurInput();
+});
 presetSelect.addEventListener('blur', blurInput);
 presetSelect.addEventListener('focus', readyPreset);
 applyPresetButton.addEventListener('click', applyPreset);
