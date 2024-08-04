@@ -184,6 +184,10 @@ select:focus {
     .collapse {
         display: none;
     }
+
+    .select-container {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 380px) {
@@ -195,9 +199,8 @@ select:focus {
         content: attr(data-min-placeholder);
     }
 
-    select {
-        width: max-content;
-        min-width: 100%;
+    .select-container {
+        grid-template-columns: 1fr;
     }
 
     ol {
