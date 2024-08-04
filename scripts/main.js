@@ -7,7 +7,7 @@ const applyColor = () => {
             popup.showPopover();
             focusInput();
         } catch (err) {
-            console.error("Error showing popover:", err);
+            console.error('Error showing popover:', err);
         }
         return;
     }
@@ -19,17 +19,10 @@ const applyColor = () => {
     const startContainer = range.startContainer;
     const endContainer = range.endContainer;
 
-    console.log("Initial state of #message-input:", document.getElementById('message-input').innerHTML);
-
-    console.log("Range Start Container:", startContainer);
-    console.log("Range End Container:", endContainer);
-
     const handleTextNode = (node, startOffset, endOffset) => {
         if (node.nodeType !== Node.TEXT_NODE) {
-            console.error("Expected a text node but found:", node);
             return;
         }
-        console.log("Handling text node:", node);
 
         const fullText = node.textContent;
         const beforeText = fullText.slice(0, startOffset);
@@ -56,15 +49,12 @@ const applyColor = () => {
         }
 
         node.replaceWith(fragment);
-        console.log("State of #message-input after handling text node:", document.getElementById('message-input').innerHTML);
     };
 
     const splitSpan = (span, startOffset, endOffset) => {
         if (span.nodeType !== Node.ELEMENT_NODE || span.tagName !== 'SPAN') {
-            console.error("Expected a span element but found:", span);
             return;
         }
-        console.log("Splitting span:", span);
 
         const fullText = span.textContent;
         const beforeText = fullText.slice(0, startOffset);
@@ -93,7 +83,6 @@ const applyColor = () => {
         }
 
         span.replaceWith(fragment);
-        console.log("State of #message-input after splitting span:", document.getElementById('message-input').innerHTML);
     };
 
     const processNodesInRange = (range) => {
@@ -102,7 +91,11 @@ const applyColor = () => {
             NodeFilter.SHOW_TEXT,
             {
                 acceptNode: (node) => {
-                    return NodeFilter.FILTER_ACCEPT;
+                    if (range.intersectsNode(node)) {
+                        return NodeFilter.FILTER_ACCEPT;
+                    } else {
+                        return NodeFilter.FILTER_REJECT;
+                    }
                 }
             },
             false
@@ -129,8 +122,6 @@ const applyColor = () => {
             currentNode = walker.nextNode();
         }
 
-        logNodesProcessing(nodesToProcess);
-
         nodesToProcess.forEach(({ node, startOffset, endOffset }) => {
             const parentElement = node.parentElement;
             if (parentElement && parentElement.tagName === 'SPAN' && parentElement.style.color) {
@@ -139,17 +130,11 @@ const applyColor = () => {
                 handleTextNode(node, startOffset, endOffset);
             }
         });
-
-        console.log("State of #message-input after processing nodes:", document.getElementById('message-input').innerHTML);
     };
 
     processNodesInRange(range);
 
-    console.log("State of #message-input before merging spans:", document.getElementById('message-input').innerHTML);
-
     mergeAdjacentSpans();
-
-    console.log("State of #message-input after merging spans:", document.getElementById('message-input').innerHTML);
 
     updateOutputCode();
     blurOnUpdate();
@@ -158,27 +143,20 @@ const applyColor = () => {
 const mergeAdjacentSpans = () => {
     const messageInput = document.getElementById('message-input');
     if (!messageInput) {
-        console.error("No message-input element found.");
         return;
     }
 
     const spans = Array.from(messageInput.querySelectorAll('span'));
     if (!spans.length) {
-        console.log("No spans found for merging.");
         return;
     }
-
-    console.log("Spans found:", spans);
 
     let i = 0;
     while (i < spans.length - 1) {
         const currentSpan = spans[i];
         const nextSpan = spans[i + 1];
 
-        console.log("Current Span:", currentSpan);
-        console.log("Next Span:", nextSpan);
-
-        if (currentSpan.textContent === "" || nextSpan.textContent === "") {
+        if (currentSpan.textContent === '' || nextSpan.textContent === '') {
             i++;
             continue;
         }
@@ -186,24 +164,11 @@ const mergeAdjacentSpans = () => {
         if (currentSpan.style.color === nextSpan.style.color) {
             currentSpan.textContent += nextSpan.textContent;
             nextSpan.remove();
-            spans.splice(i + 1, 1); // Remove the merged span from the array
+            spans.splice(i + 1, 1);
         } else {
             i++;
         }
     }
-};
-
-// Debug logging function to track the processing of nodes
-const logNodesProcessing = (nodesToProcess) => {
-    console.log("Nodes to process:");
-    nodesToProcess.forEach(({ node, startOffset, endOffset }) => {
-        console.log({
-            node: node,
-            startOffset: startOffset,
-            endOffset: endOffset,
-            textContent: node.textContent
-        });
-    });
 };
 
 const checkMessageInputLength = () => {
@@ -234,7 +199,7 @@ const closePopup = () => {
     try {
         document.getElementById('message-warning').hidePopover();
     } catch (err) {
-        console.error(err);
+        console.error('Error hiding popover:', err);
     }
 };
 
@@ -289,9 +254,9 @@ const copyCode = () => {
         popover.togglePopover();
         setTimeout(() => {
             popover.hidePopover();
-        }, "1200");
+        }, '120');
     } catch (err) {
-        console.error(err);
+        console.error('Error hiding popover:', err);
     }
     copyCodeButton.focus();
 };
