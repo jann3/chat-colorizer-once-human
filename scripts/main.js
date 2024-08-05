@@ -91,7 +91,7 @@ const applyColor = () => {
             NodeFilter.SHOW_TEXT,
             {
                 acceptNode: (node) => {
-                    if (range.intersectsNode(node)) {
+                    if (range.intersectsNode(node) && node.parentNode !== messageInput) {
                         return NodeFilter.FILTER_ACCEPT;
                     } else {
                         return NodeFilter.FILTER_REJECT;
@@ -141,15 +141,10 @@ const applyColor = () => {
 };
 
 const mergeAdjacentSpans = () => {
-    const messageInput = document.getElementById('message-input');
-    if (!messageInput) {
-        return;
-    }
+    if (!messageInput) return;
 
     const spans = Array.from(messageInput.querySelectorAll('span'));
-    if (!spans.length) {
-        return;
-    }
+    if (!spans.length) return;
 
     let i = 0;
     while (i < spans.length - 1) {
