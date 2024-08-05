@@ -76,29 +76,30 @@
 		</div>
 
 
-		<div class="color-picker-container">
-			<label for="color-picker">Color:</label>
-			<input type="color" id="color-picker" value="#ffffff">
-			<button id="apply-button">Apply</button>
+		<div class="controls-container">
+			<div class="color-picker-container">
+				<label id="color-picker-label" for="color-picker">Color:</label>
+				<input id="color-picker" type="color" value="#ffffff">
+				<button id="apply-button">Apply</button>
+			</div>
+			<div class="select-container">
+				<label id="preset-select-label" for="preset-select" class="collapse">Theme:</label>
+				<select id="preset-select">
+					<option value="pastelRainbow">Pastel Rainbow</option>
+					<option value="galaxyNebula">Galaxy Nebula</option>
+					<option value="sharkPlush">Shark Plush</option>
+					<option value="vintagePoster">Vintage Poster</option>
+					<option value="randomChalk">Random Chalk</option>
+					<option value="randomHue">Random Hue</option>
+				</select>
+
+				<button id="apply-preset-button" class="collapse" aria-label="randomize" disabled><img
+						src="icons/rotate-solid.svg" alt="Randomize" role="presentation"></button>
+				<div></div>
+			</div>
+
 			<button id="reset-button">Reset</button>
 		</div>
-
-		<div class="select-container">
-			<label for="preset-select" class="collapse">Theme:</label>
-			<select id="preset-select">
-				<option value="pastelRainbow">Pastel Rainbow</option>
-				<option value="galaxyNebula">Galaxy Nebula</option>
-				<option value="sharkPlush">Shark Plush</option>
-				<option value="vintagePoster">Vintage Poster</option>
-				<option value="randomChalk">Random Chalk</option>
-				<option value="randomHue">Random Hue</option>
-			</select>
-
-			<button id="apply-preset-button" class="collapse" aria-label="randomize" disabled><img
-					src="icons/rotate-solid.svg" alt="Randomize" role="presentation"></button>
-			<div></div>
-		</div>
-
 
 		<div class="output-container">
 			<h2 id="output-heading">Output Code</h2>
