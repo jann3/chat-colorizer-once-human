@@ -190,6 +190,39 @@ select:focus {
     }
 }
 
+@media (max-width: 600px) {
+    .select-container {
+        grid-template-columns: auto 1fr auto;
+    }
+}
+
+@media (max-width: 550px) and (min-width: 381px) {
+    .controls-container label {
+        min-width: 56px;
+    }
+}
+
+@media (max-width: 550px) {
+
+
+    .color-picker-container {
+        /* flex-wrap: wrap; */
+        grid-template-columns: auto auto auto;
+        /* grid-auto-rows: auto; */
+    }
+
+    .select-container {
+        grid-template-columns: auto 1fr auto;
+        grid-column: 1 / span 2;
+        grid-row: 2/3;
+    }
+
+    .controls-container {
+        grid-template-columns: 1fr auto;
+        grid-auto-rows: auto;
+    }
+}
+
 @media (max-width: 380px) {
     .collapse {
         display: none;
@@ -225,19 +258,26 @@ select:focus {
     }
 }
 
-@media (max-width: 550px) {
-    .color-picker-container {
-        flex-wrap: wrap;
-    }
-}
-
 @media (max-width: 240px) {
+    .select-container select {
+        width: 100%;
+    }
+
+    .controls-container {
+        grid-template-columns: 1fr;
+    }
+
+    .select-container {
+        grid-column: 1 / span 1;
+        grid-row: 2 / 3;
+    }
+
     .color-picker-container {
-        flex-direction: column;
+        grid-template-columns: auto 1fr auto;
     }
 
     .color-picker-container>button,
-    .color-picker-container>input {
+    .color-picker-container>input:not([type="color"]) {
         width: 100%;
         justify-content: center;
     }

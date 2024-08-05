@@ -25,6 +25,7 @@ body {
     min-height: 100svh;
     display: flex;
     flex-direction: column;
+    min-width: 9.688rem;
 }
 
 .fade-in {
@@ -82,18 +83,31 @@ input[type="text"] {
     margin-bottom: 2px;
 }
 
-.color-picker-container {
-    display: flex;
+.controls-container {
+    display: grid;
     align-items: center;
     margin-top: 2px;
+    gap: 8px;
+    grid-template-columns: auto 1fr auto;
+    grid-auto-rows: auto;
+}
+
+
+.color-picker-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    justify-items: stretch;
+    align-content: center;
+    justify-content: left;
     gap: 8px;
 }
 
 .select-container {
     display: grid;
     width: 100%;
-    margin-top: 8px;
-    grid-template-columns: auto 1fr auto 1fr;
+    grid-template-columns: auto 1fr auto 2fr;
     align-items: center;
     justify-items: stretch;
     align-content: center;
@@ -101,11 +115,16 @@ input[type="text"] {
     gap: 8px;
 }
 
+.select-container>div:empty {
+    display: none;
+}
+
 .select-container select {
     font-size: 0.9rem;
-    width: 100%;
+    /* width: 100%; */
     box-sizing: border-box;
     justify-self: stretch;
+    min-width: 9.4rem;
 }
 
 .select-container button {
@@ -113,7 +132,6 @@ input[type="text"] {
 }
 
 .color-picker-container button:last-child {
-    align-self: flex-start;
     margin-left: auto;
 }
 
@@ -149,12 +167,13 @@ input[type="color"] {
     -webkit-appearance: none;
     border: 1px solid var(--main-font);
     border-radius: 0.5rem;
-    width: clamp(2rem, -0.5rem + 8vw, 3rem);
+    width: clamp(2rem, -1.5rem + 25vw, 3rem);
 }
 
 button {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
 }
 
 button>img {
