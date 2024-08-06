@@ -3,18 +3,13 @@ h2 {
     text-shadow: 0 0 3px var(--main-bg);
 }
 
-input[type="color"]::-webkit-color-swatch {
-    border: none;
-    border-radius: 0.5rem;
-    padding: 0;
-}
-
+input[type="color"]::-webkit-color-swatch,
 input[type="color"]::-webkit-color-swatch-wrapper {
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 0.4rem;
     padding: 0;
+    box-shadow: inset 0 0 0.3rem 0.3rem rgb(20 20 20 / 10%);
 }
-
 
 button:active,
 input[type="color"]:active {
