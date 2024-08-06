@@ -33,8 +33,17 @@ body {
 }
 
 ol {
-    margin: 10px 0;
+    margin: 0 0;
     font-size: 0.9rem;
+}
+
+details {
+    margin: 0 0 10px;
+}
+
+summary {
+    padding-right: 10px;
+    cursor: pointer;
 }
 
 h1 {
