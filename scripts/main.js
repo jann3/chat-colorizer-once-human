@@ -249,7 +249,7 @@ const copyCode = () => {
         popover.togglePopover();
         setTimeout(() => {
             popover.hidePopover();
-        }, '120');
+        }, '1200');
     } catch (err) {
         console.error('Error hiding popover:', err);
     }
