@@ -4,8 +4,13 @@ const applyColor = () => {
 
     if (selection.rangeCount === 0 || selection.getRangeAt(0).collapsed) {
         try {
-            popup.showPopover();
-            focusInput();
+            popup.togglePopover();
+            console.log('attempt');
+            if (popup.matches(':popover-open')) {
+                focusInput();
+            } else {
+                blurInput();
+            }
         } catch (err) {
             console.error('Error showing popover:', err);
         }
