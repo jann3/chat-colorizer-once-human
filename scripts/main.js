@@ -294,14 +294,17 @@ const applyPreset = () => {
         case 'pastelRainbow':
             colors = ['#FF5252', '#FFA052', '#8EDF58', '#3EEAC7', '#65A9F1', '#CD69F2', '#ED5AB7'];
             break;
-        case 'onceHuman':
-            colors = ['#4AC2C5', '#DA002B', '#4AC2C5', '#DA002B', '#4AC2C5'];
+        case 'sunrise':
+            colors = ['#ff5858', '#ff6938', '#fb8f23', '#fcb138', '#ffeb46', '#fcb138', '#fb8f23', '#ff6938', '#ff5858'];
+            break;
+        case 'brazil':
+            colors = ['#5ed928', '#fae43f', '#ffce0f', '#42ae3b', '#3cb4ff', '#61e3ff', '#5ed928', '#fae43f'];
             break;
         case 'galaxyNebula':
-            colors = ['#E958CF', '#BB78F2', '#765bec', '#6785e0', '#68C5E3', '#5BD29E'];
+            colors = ['#E958CF', '#BB78F2', '#a08aff', '#7d9bf3', '#68C5E3', '#5BD29E'];
             break;
         case 'vintagePoster':
-            colors = ['#ff411f', '#e96758', '#edc47c', '#5fb8b2', '#3987a1', '#5b67d2'];
+            colors = ['#ff411f', '#f56f5f', '#e7b96e', '#edc47c', '#5fb8b2', '#5096c8', '#5a64fa'];
             break;
         case 'sharkPlush':
             colors = ['#6dc2fa', '#f695f1', '#ffffff', '#f695f1', '#6dc2fa'];
