@@ -291,6 +291,10 @@ const convertToColoredText = (node) => {
         let color = node.style.color;
         const hexColor = rgbToHex(color);
 
+        if (node.textContent.trim() === '') {
+            return node.textContent;
+        }
+
         let formattedHexColor = colorShortcuts[hexColor] || hexColor;
         if (!colorShortcuts[hexColor]) {
             formattedHexColor = hexColor.startsWith('#c') ? hexColor : `#c${hexColor.slice(1)}`;
