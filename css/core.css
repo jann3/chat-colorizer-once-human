@@ -103,6 +103,11 @@ input[type="text"] {
 
 .contrast-container {
     text-wrap: nowrap;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    justify-items: stretch;
+    gap: 8px;
 }
 
 .color-picker-container {
@@ -133,7 +138,6 @@ input[type="text"] {
 
 .select-container select {
     font-size: 0.9rem;
-    /* width: 100%; */
     box-sizing: border-box;
     justify-self: stretch;
     min-width: 9.4rem;
