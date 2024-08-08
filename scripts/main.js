@@ -205,7 +205,33 @@ const updateOutputCode = () => {
     const coloredText = convertToColoredText(tempDiv);
     outputCode.value = coloredText;
     updateCharCounter(coloredText.length);
+    calculateContrastRatios();
 };
+
+const colorShortcuts = {
+    '#FFFFFF': '#W',
+    '#000000': '#K',
+    '#FF0000': '#R',
+    '#00FF00': '#G',
+    '#0000FF': '#B',
+    '#FFFF00': '#Y'
+};
+
+// const convertToColoredText = (node) => {
+//     if (node.nodeType === Node.TEXT_NODE) {
+//         return node.nodeValue.includes('#') ? node.nodeValue.replace(/#/g, '##') : node.nodeValue;
+//     }
+
+//     if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'SPAN') {
+//         const color = node.style.color;
+//         const hexColor = rgbToHex(color);
+//         const formattedHexColor = hexColor.startsWith('#c') ? hexColor : `#c${hexColor.slice(1)}`;
+//         const content = Array.from(node.childNodes).map(child => convertToColoredText(child)).join('');
+//         return `${formattedHexColor}${content}`;
+//     }
+
+//     return Array.from(node.childNodes).map(child => convertToColoredText(child)).join('');
+// };
 
 const convertToColoredText = (node) => {
     if (node.nodeType === Node.TEXT_NODE) {
@@ -213,9 +239,14 @@ const convertToColoredText = (node) => {
     }
 
     if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'SPAN') {
-        const color = node.style.color;
+        let color = node.style.color;
         const hexColor = rgbToHex(color);
-        const formattedHexColor = hexColor.startsWith('#c') ? hexColor : `#c${hexColor.slice(1)}`;
+
+        let formattedHexColor = colorShortcuts[hexColor] || hexColor;
+        if (!colorShortcuts[hexColor]) {
+            formattedHexColor = hexColor.startsWith('#c') ? hexColor : `#c${hexColor.slice(1)}`;
+        }
+
         const content = Array.from(node.childNodes).map(child => convertToColoredText(child)).join('');
         return `${formattedHexColor}${content}`;
     }
