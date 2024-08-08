@@ -133,7 +133,6 @@ const applyColor = () => {
     };
 
     processNodesInRange(range);
-
     mergeAdjacentSpans();
 
     updateOutputCode();
@@ -162,6 +161,75 @@ const mergeAdjacentSpans = () => {
             spans.splice(i + 1, 1);
         } else {
             i++;
+        }
+    }
+};
+
+const calculateContrastRatios = () => {
+    const defaultBackgroundColor = '#404040';
+    const spans = messageInput.querySelectorAll('span');
+
+    const hexToRgb = (hex) => {
+        const bigint = parseInt(hex.slice(1), 16);
+        const r = (bigint >> 16) & 255;
+        const g = (bigint >> 8) & 255;
+        const b = bigint & 255;
+        return [r, g, b];
+    };
+
+    const luminance = (r, g, b) => {
+        const a = [r, g, b].map((v) => {
+            v /= 255;
+            return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+        });
+        return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+    };
+
+    const contrastRatio = (lum1, lum2) => {
+        const brightest = Math.max(lum1, lum2);
+        const darkest = Math.min(lum1, lum2);
+        return (brightest + 0.05) / (darkest + 0.05);
+    };
+
+    const backgroundColorRgb = hexToRgb(defaultBackgroundColor);
+    const backgroundLuminance = luminance(...backgroundColorRgb);
+
+    const ratios = [];
+
+    spans.forEach((span) => {
+        const color = window.getComputedStyle(span).color;
+        const rgb = color.match(/\d+/g).map(Number);
+        const textLuminance = luminance(...rgb);
+        const ratio = contrastRatio(backgroundLuminance, textLuminance);
+
+        if (span.textContent !== ' ') {
+            console.log(`Contrast ratio for ${span.textContent}: ${ratio.toFixed(2)}`);
+            ratios.push(Number(ratio.toFixed(2)));
+
+        } else {
+            console.log('Contrast ratio for empty discarded');
+        }
+    });
+
+    const averageRatio = ratios.reduce((previous, current, index, array) => {
+        return previous + (current / array.length);
+    }, 0);
+
+    const minRatio = ratios.reduce((previous, current) => {
+        return current < previous ? current : previous;
+    }, ratios[0]);
+
+    const weightedRatio = (a, b) => {
+        return ((a * 1 + b * 2) / 3);
+    };
+
+    const finalRatio = weightedRatio(averageRatio.toFixed(2), minRatio)
+
+    if (averageRatio !== 0) {
+        if (finalRatio > 10) {
+            contrastMeter.value = 10;
+        } else {
+            contrastMeter.value = finalRatio;
         }
     }
 };
@@ -216,22 +284,6 @@ const colorShortcuts = {
     '#0000FF': '#B',
     '#FFFF00': '#Y'
 };
-
-// const convertToColoredText = (node) => {
-//     if (node.nodeType === Node.TEXT_NODE) {
-//         return node.nodeValue.includes('#') ? node.nodeValue.replace(/#/g, '##') : node.nodeValue;
-//     }
-
-//     if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'SPAN') {
-//         const color = node.style.color;
-//         const hexColor = rgbToHex(color);
-//         const formattedHexColor = hexColor.startsWith('#c') ? hexColor : `#c${hexColor.slice(1)}`;
-//         const content = Array.from(node.childNodes).map(child => convertToColoredText(child)).join('');
-//         return `${formattedHexColor}${content}`;
-//     }
-
-//     return Array.from(node.childNodes).map(child => convertToColoredText(child)).join('');
-// };
 
 const convertToColoredText = (node) => {
     if (node.nodeType === Node.TEXT_NODE) {
@@ -304,6 +356,7 @@ const resetInput = () => {
     messageInput.innerHTML = '';
     outputCode.value = '';
     colorPicker.value = '#ffffff';
+    contrastMeter.value = 9.74;
     updateCharCounter(0);
 };
 
@@ -464,6 +517,7 @@ const copyCodeButton = document.getElementById('copy-code');
 const heartButton = document.querySelector('footer span[aria-label="heart"]');
 const presetSelect = document.getElementById('preset-select');
 const applyPresetButton = document.getElementById('apply-preset-button');
+const contrastMeter = document.getElementById('contrast-meter');
 const charLimit = 130;
 let selectedColor = colorPicker.value;
 
