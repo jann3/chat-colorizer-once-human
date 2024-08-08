@@ -211,7 +211,7 @@ select:focus {
 
 @media (max-width: 740px) and (min-width: 381px) {
     .controls-container label {
-        min-width: 65px;
+        min-width: 3.75rem;
     }
 }
 
