@@ -524,6 +524,7 @@ const defaultFont = rootStlye.getPropertyValue('--main-font');
 
 const blurElements = [
     document.querySelector('.output-container'),
+    document.querySelector('details'),
     document.querySelector('h1'),
     document.querySelector('ol'),
     document.querySelector('footer')
