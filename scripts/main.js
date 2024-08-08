@@ -203,11 +203,8 @@ const calculateContrastRatios = () => {
         const ratio = contrastRatio(backgroundLuminance, textLuminance);
 
         if (span.textContent !== ' ') {
-            console.log(`Contrast ratio for ${span.textContent}: ${ratio.toFixed(2)}`);
+            // console.log(`Contrast ratio for ${span.textContent}: ${ratio.toFixed(2)}`);
             ratios.push(Number(ratio.toFixed(2)));
-
-        } else {
-            console.log('Contrast ratio for empty discarded');
         }
     });
 
