@@ -217,7 +217,7 @@ const calculateContrastRatios = () => {
     }, ratios[0]);
 
     const weightedRatio = (a, b) => {
-        return ((a * 1 + b * 2) / 3);
+        return ((a * 1 + b * 2) / 3).toFixed(2);
     };
 
     const finalRatio = weightedRatio(averageRatio.toFixed(2), minRatio)
@@ -353,7 +353,7 @@ const resetInput = () => {
     messageInput.innerHTML = '';
     outputCode.value = '';
     colorPicker.value = '#ffffff';
-    contrastMeter.value = 9.74;
+    contrastMeter.value = 10;
     updateCharCounter(0);
 };
 
