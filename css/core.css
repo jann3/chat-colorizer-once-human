@@ -97,15 +97,18 @@ input[type="text"] {
     align-items: center;
     margin-top: 2px;
     gap: 8px;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr auto auto;
     grid-auto-rows: auto;
 }
 
+.contrast-container {
+    text-wrap: nowrap;
+}
 
 .color-picker-container {
     display: grid;
     width: 100%;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto auto auto;
     align-items: center;
     justify-items: stretch;
     align-content: center;
@@ -174,7 +177,7 @@ select {
 input[type="color"] {
     padding: 0;
     -webkit-appearance: none;
-    width: clamp(2rem, -1.5rem + 25vw, 3rem);
+    width: clamp(2rem, -1.5rem + 35vw, 3rem);
 }
 
 button {
