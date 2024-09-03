@@ -519,6 +519,9 @@ const heartButton = document.querySelector('footer span[aria-label="heart"]');
 const presetSelect = document.getElementById('preset-select');
 const applyPresetButton = document.getElementById('apply-preset-button');
 const contrastMeter = document.getElementById('contrast-meter');
+const contrastContainer = document.querySelector('.contrast-container');
+const contrastWarning = document.getElementById('contrast-meter-message-warning');
+
 const charLimit = 130;
 let selectedColor = colorPicker.value;
 
@@ -552,6 +555,22 @@ applyButton.addEventListener('click', () => {
 });
 applyButton.addEventListener('blur', () => {
     blurInput();
+});
+
+contrastContainer.addEventListener('mouseover', () => {
+    contrastWarning.showPopover();
+});
+
+contrastContainer.addEventListener('focus', () => {
+    contrastWarning.showPopover();
+});
+
+contrastContainer.addEventListener('mouseleave', () => {
+    contrastWarning.hidePopover();
+});
+
+contrastContainer.addEventListener('blur', () => {
+    contrastWarning.hidePopover();
 });
 
 resetButton.addEventListener('click', resetInput);
