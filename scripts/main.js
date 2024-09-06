@@ -388,6 +388,9 @@ const applyPreset = () => {
         case 'galaxyNebula':
             colors = ['#E958CF', '#BB78F2', '#a08aff', '#7d9bf3', '#68C5E3', '#5BD29E'];
             break;
+        case 'warpStorm':
+            colors = ['#CC2253', '#DC306B', '#D83A7A', '#C72580', '#BD3388', '#CC4499'];
+            break;
         case 'vintagePoster':
             colors = ['#ff411f', '#f56f5f', '#e7b96e', '#edc47c', '#5fb8b2', '#5096c8', '#5a64fa'];
             break;
