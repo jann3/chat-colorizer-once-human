@@ -52,6 +52,15 @@ select:focus {
     max-width: 100vw;
 }
 
+div:focus,
+div:focus-visible,
+summary:focus,
+summary:focus-visible,
+details:focus,
+details:focus-visible {
+    outline-color: var(--main-focus);
+}
+
 @supports(position-anchor: --anchorName) {
 
     .message-input {
