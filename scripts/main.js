@@ -367,7 +367,7 @@ const randomHueColor = (saturation, lightness) => {
     return rgbToHex(`rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`);
 };
 
-const readyPreset = (event) => {
+const readyPreset = () => {
     presetSelect.selectedIndex = -1;
 }
 
