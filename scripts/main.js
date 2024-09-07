@@ -377,7 +377,7 @@ const applyPreset = () => {
 
     switch (preset) {
         case 'pastelRainbow':
-            colors = ['#FF5252', '#FFA052', '#8EDF58', '#3EEAC7', '#65A9F1', '#CD69F2', '#ED5AB7'];
+            colors = ['#ff5252', '#ffA052', '#8edf58', '#3eeac7', '#65a9f1', '#cd69f2', '#ed5ab7'];
             break;
         case 'sunrise':
             colors = ['#ff5858', '#ff6938', '#fb8f23', '#fcb138', '#ffeb46', '#fcb138', '#fb8f23', '#ff6938', '#ff5858'];
@@ -386,10 +386,13 @@ const applyPreset = () => {
             colors = ['#5ed928', '#fae43f', '#ffce0f', '#42ae3b', '#3cb4ff', '#61e3ff', '#5ed928', '#fae43f'];
             break;
         case 'galaxyNebula':
-            colors = ['#E958CF', '#BB78F2', '#a08aff', '#7d9bf3', '#68C5E3', '#5BD29E'];
+            colors = ['#e958cf', '#bb78f2', '#a08aff', '#7d9bf3', '#68c5e3', '#5bd29e'];
             break;
         case 'warpStorm':
-            colors = ['#CC2253', '#DC306B', '#D83A7A', '#C72580', '#BD3388', '#CC4499'];
+            colors = ['#cc2253', '#dc306b', '#d83a7a', '#d2407b', '#bf409c', '#bb52d0', '#cc55cc', '#dd66e0'];
+            break;
+        case 'morningLight':
+            colors = ['#ffd88d', '#ffed8d', '#efeba5', '#c9e490', '#95f6f1', '#7edbff', '#95adf6', '#da8bff'];
             break;
         case 'vintagePoster':
             colors = ['#ff411f', '#f56f5f', '#e7b96e', '#edc47c', '#5fb8b2', '#5096c8', '#5a64fa'];
