@@ -61,31 +61,6 @@ details:focus-visible {
     outline-color: var(--main-focus);
 }
 
-details * {
-    margin: 0;
-}
-
-details {
-    margin-bottom: 0.62rem;
-    overflow: hidden;
-}
-
-details>summary {
-    padding-right: 10px;
-    cursor: pointer;
-}
-
-details>summary::marker {
-    color: var(--main-font-off);
-}
-
-details>ol {
-    padding: 0.2rem 0 0.3rem inherit;
-}
-
-details {
-    overflow: hidden;
-}
 
 details::details-content {
     block-size: 0;
