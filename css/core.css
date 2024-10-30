@@ -5,6 +5,8 @@
     --main-font: #ffffff;
     --warn-font: #ff1169;
     --main-focus: #28a3cf;
+    --main-font-off: #9999aa;
+    interpolate-size: allow-keywords;
 }
 
 body {
