@@ -39,13 +39,30 @@ ol {
     font-size: 0.9rem;
 }
 
-details {
-    margin: 0 0 10px;
+details * {
+    margin: 0;
 }
 
-summary {
+details {
+    margin-bottom: 0.62rem;
+    overflow: hidden;
+}
+
+details>summary {
     padding-right: 10px;
     cursor: pointer;
+}
+
+details>summary::marker {
+    color: var(--main-font-off);
+}
+
+details>ol {
+    padding: 0.2rem 0 0.3rem inherit;
+}
+
+details {
+    overflow: hidden;
 }
 
 h1 {
