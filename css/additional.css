@@ -448,8 +448,12 @@ footer>span {
         gap: 1rem;
         padding: 0;
         justify-content: space-around;
-        align-items: center;
+        align-items: stretch;
         width: 100%;
+    }
+
+    li {
+        align-content: center;
     }
 
     h2 {
