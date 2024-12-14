@@ -473,4 +473,7 @@ footer>span {
     [popover] {
         transition: none;
     }
+    .fade-in {
+        animation-duration: 0s !important;
+    }
 }
