@@ -466,3 +466,11 @@ footer>span {
         padding-right: 1rem;
     }
 }
+
+@media (prefers-reduced-motion: reduce) {
+
+    details::details-content,
+    [popover] {
+        transition: none;
+    }
+}
